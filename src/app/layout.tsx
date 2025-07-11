@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { CartProvider } from "@/contexts/CartContext";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -22,13 +22,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 <AuthProvider>
-                    <CartProvider>
-                        <Navbar />
-                        <main className="min-h-screen bg-gray-50">
-                            {children}
-                        </main>
-                        <Toaster />
-                    </CartProvider>
+                    <Navbar />
+                    <main className="min-h-screen bg-gray-50">{children}</main>
+                    <Toaster />
                 </AuthProvider>
             </body>
         </html>

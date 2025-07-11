@@ -2,6 +2,7 @@ export interface Product {
     id: number; 
     title: string;
     description: string;
+    quantity?: number;
     price: number;
     thumbnail: string;
     images: string[];
@@ -20,11 +21,12 @@ export interface CartItem {
 }
 
 export interface Order {
-    _id: string;
+    id: string;
     customer: {
         name: string;
         email: string;
         address: string;
+        phone:number
     };
     items: CartItem[];
     total: number;
@@ -36,4 +38,13 @@ export interface Order {
 export interface User {
     email: string;
     role: "admin" | "customer";
+}
+export interface TailwindVariant {
+    variant?:
+        | "secondary"
+        | "default"
+        | "outline"
+        | "destructive"
+        | null
+        | undefined;
 }

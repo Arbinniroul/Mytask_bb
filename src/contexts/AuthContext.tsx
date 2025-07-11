@@ -1,7 +1,8 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@/types';
+
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
   user: User | null;
@@ -16,11 +17,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Check if user is already logged in
+   
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       try {
         setUser(JSON.parse(savedUser));
+        
+
       } catch (error) {
         console.error('Error loading user from localStorage:', error);
         localStorage.removeItem('user');

@@ -1,4 +1,4 @@
-import {  Product } from "@/types";
+import {  Order, Product } from "@/types";
 
 
 
@@ -47,6 +47,43 @@ export async function fetchProductById(id: string): Promise<Product | null> {
     }
 }
 
+export async function fetchOrders(): Promise<Order[]> {
+    try {
 
+      const cartStorage = localStorage.getItem('cart-storage');
+      
+      if (!cartStorage) {
+        return [];
+      }
+  
+
+      const cartData = JSON.parse(cartStorage);
+      
+
+      const cartState = cartData.state || cartData;
+      
+
+      const orders: Order[] = [{
+        id: cartState.id || "HardcodedId",
+        items: cartState.items,
+        total: cartState.total,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        status: 'pending',
+        customer: {
+            name: cartData.name,
+            email:cartData.email,
+            address: cartData.address,
+            phone: cartData.phone,
+            
+      }
+    }];
+  
+      return orders;
+    } catch (error) {
+      console.error('Error fetching orders from localStorage:', error);
+      return [];
+    }
+}
 
 

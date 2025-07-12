@@ -1,6 +1,4 @@
-import {  Order, Product } from "@/types";
-
-
+import { Order, Product } from "@/types";
 
 export async function fetchProducts(): Promise<Product[]> {
     const url = "https://dummyjson.com/products";
@@ -12,7 +10,7 @@ export async function fetchProducts(): Promise<Product[]> {
     try {
         const response = await fetch(url, options);
         const json = await response.json();
-        const rawProducts = json?.products; 
+        const rawProducts = json?.products;
 
         if (!Array.isArray(rawProducts)) return [];
 
@@ -49,41 +47,36 @@ export async function fetchProductById(id: string): Promise<Product | null> {
 
 export async function fetchOrders(): Promise<Order[]> {
     try {
+        const cartStorage = localStorage.getItem("cart-storage");
 
-      const cartStorage = localStorage.getItem('cart-storage');
-      
-      if (!cartStorage) {
-        return [];
-      }
-  
+        if (!cartStorage) {
+            return [];
+        }
 
-      const cartData = JSON.parse(cartStorage);
-      
+        const cartData = JSON.parse(cartStorage);
 
-      const cartState = cartData.state || cartData;
-      
+        const cartState = cartData.state || cartData;
 
-      const orders: Order[] = [{
-        id: cartState.id || "HardcodedId",
-        items: cartState.items,
-        total: cartState.total,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        status: 'pending',
-        customer: {
-            name: cartData.name,
-            email:cartData.email,
-            address: cartData.address,
-            phone: cartData.phone,
-            
-      }
-    }];
-  
-      return orders;
+        const orders: Order[] = [
+            {
+                id: cartState.id || "HardcodedId",
+                items: cartState.items,
+                total: cartState.total,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                status: "pending",
+                customer: {
+                    name: cartData.name,
+                    email: cartData.email,
+                    address: cartData.address,
+                    phone: cartData.phone,
+                },
+            },
+        ];
+
+        return orders;
     } catch (error) {
-      console.error('Error fetching orders from localStorage:', error);
-      return [];
+        console.error("Error fetching orders from localStorage:", error);
+        return [];
     }
 }
-
-

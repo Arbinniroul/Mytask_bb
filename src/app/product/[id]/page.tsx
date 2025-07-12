@@ -3,6 +3,8 @@ import { Product } from "@/types";
 import { notFound } from "next/navigation";
 import ProductClient from "./productClient";
 
+
+
 export async function generateStaticParams() {
     const res = await fetch("https://dummyjson.com/products?limit=10");
     const { products } = await res.json();
@@ -12,16 +14,13 @@ export async function generateStaticParams() {
     }));
 }
 
-export const dynamicParams = false;
+export default async function ProductPage(props: any) {
+    const { id } = props.params as { id: string };
+    const product = await fetchProductById(id);
 
-export default async function ProductPage({
-    params,
-}: {
-    params: { id: string };
-}) {
-    const product = await fetchProductById(params.id);
     if (!product) {
         notFound();
     }
+
     return <ProductClient initialProduct={product} />;
 }

@@ -224,7 +224,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployment
 
-Here is the deployment link: [E-Commerce App on Vercel](https://your-deployment-link.vercel.app)
+Here is the deployment link: [E-Commerce App on Vercel](https://mytask-au1zp9lyq-orbnirrs-projects.vercel.app/)
 
 ## Technical Stack
 

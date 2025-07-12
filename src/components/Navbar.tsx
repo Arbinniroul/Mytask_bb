@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/store/CartStore";
-import { LogOut, ShoppingCart, Store, User } from "lucide-react";
+import { Github, LogOut, ShoppingCart, Store, User } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -66,6 +66,19 @@ export default function Navbar() {
                                 </Button>
                             </Link>
                         )}
+
+                        <Link
+                            href="https://github.com/Arbinniroul/Mytask_bb"
+                            className="relative cursor-pointer"
+                        >
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="relativ cursor-pointer"
+                            >
+                                <Github className="size-5" />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>
